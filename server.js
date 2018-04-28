@@ -11,7 +11,8 @@ io.on('connection', function(socket){
 
 	socket.on('message', function(message){
 		console.log("data received: " + message.text);
-		socket.broadcast.emit('message', message);
+		//broadcast emits to every browser but my own
+		io.emit('message', message);
 	});
 
 	socket.emit('message', {
