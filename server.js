@@ -7,6 +7,12 @@ var io = require('socket.io')(http);
 
 app.use(express.static(__dirname + '/public'));
 
+//Routes
+app.get('/contact', function(req, res){
+	res.sendFile(__dirname + '/public/view/contact.html');
+});
+
+//Sockets
 io.on('connection', function(socket){
 	console.log("USER CONNECTED VIA SOCKET.IO");
 	
@@ -18,11 +24,13 @@ io.on('connection', function(socket){
 	});
 
 	socket.emit('message', {
+		name: 'System',
 		text: 'Welcome to the app, have fun but it will soon self destruct',
 		timestamp: moment().valueOf()
 	});
 });
 
+//Listen
 http.listen(PORT, function(){
 	console.log("Server started");
 });
