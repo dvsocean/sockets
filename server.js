@@ -16,7 +16,7 @@ io.on('connection', function(socket){
 	});
 
 	socket.emit('message', {
-		text: 'Welcome to the app, have fun cause it will self destruct in 5 seconds'
+		text: 'Welcome to the app, have fun but it will soon self destruct'
 	});
 });
 
