@@ -1,9 +1,9 @@
 var socket = io();
 var name = getQueryVariable('name') || 'Name not defined!!';
-var room = getQueryVariable('room');
+var room = getQueryVariable('room') || 'Throne room';
 
 $('#get-params').click(function(){
-	$('.query-params').html('Hello ' + name + ', you just joined room ' + room);
+	$('.query-params').html('Hello ' + name + ', you just joined ' + room);
 });
 
 socket.on('connect', function(){

@@ -8,8 +8,12 @@ var io = require('socket.io')(http);
 app.use(express.static(__dirname + '/public'));
 
 //Routes
-app.get('/contact', function(req, res){
-	res.sendFile(__dirname + '/public/view/contact.html');
+app.get('/details', function(req, res){
+	res.sendFile(__dirname + '/public/view/details.html');
+});
+
+app.get('/chat', function(req, res){
+	res.sendFile(__dirname + '/public/view/chat.html');
 });
 
 //Sockets
