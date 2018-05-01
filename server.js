@@ -18,9 +18,27 @@ app.get('/chat', function(req, res){
 	res.sendFile(__dirname + '/public/view/chat.html');
 });
 
+
+
+
+
 //Sockets
 io.on('connection', function(socket){
 	console.log("USER CONNECTED VIA SOCKET.IO");
+
+	//For when someone disconnects
+	socket.on('disconnect', function(){
+		var userData = clientInfo[socket.id];
+		if(typeof userData !== 'undefined'){
+			socket.leave(userData.room);
+			io.to(userData.room).emit('message', {
+				name: 'System',
+				text: userData.name + ' has left',
+				timestamp: moment.valueOf()
+			});
+			delete clientInfo[socket.id];
+		}
+	});
 	
 	socket.on('joinRoom', function(req){
 		clientInfo[socket.id] = req;
