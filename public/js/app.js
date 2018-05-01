@@ -6,8 +6,14 @@ $('#get-params').click(function(){
 	$('.query-params').html('Hello ' + name + ', you just joined ' + room);
 });
 
+$('.room-title').text(room);
+
 socket.on('connect', function(){
 	console.log('CONNECTED TO SOCKET/EXPRESS SERVER!');
+	socket.emit('joinRoom', {
+		name: name,
+		room: room
+	});
 });
 
 socket.on('message', function(message){
